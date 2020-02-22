@@ -1,74 +1,75 @@
 import java.awt.*;
-import javax.swing.*;
+import java.awt.geom.Ellipse2D;
 
-public class AlgoFrame extends JFrame{
+import java.awt.geom.Rectangle2D;
+import java.lang.InterruptedException;
 
-    private int canvasWidth;
-    private int canvasHeight;
+public class AlgoVisHelper {
 
-    public AlgoFrame(String title, int canvasWidth, int canvasHeight){
+    private AlgoVisHelper(){}
 
-        super(title);
+    public static final Color Red = new Color(0xF44336);
+    public static final Color Pink = new Color(0xE91E63);
+    public static final Color Purple = new Color(0x9C27B0);
+    public static final Color DeepPurple = new Color(0x673AB7);
+    public static final Color Indigo = new Color(0x3F51B5);
+    public static final Color Blue = new Color(0x2196F3);
+    public static final Color LightBlue = new Color(0x03A9F4);
+    public static final Color Cyan = new Color(0x00BCD4);
+    public static final Color Teal = new Color(0x009688);
+    public static final Color Green = new Color(0x4CAF50);
+    public static final Color LightGreen = new Color(0x8BC34A);
+    public static final Color Lime = new Color(0xCDDC39);
+    public static final Color Yellow = new Color(0xFFEB3B);
+    public static final Color Amber = new Color(0xFFC107);
+    public static final Color Orange = new Color(0xFF9800);
+    public static final Color DeepOrange = new Color(0xFF5722);
+    public static final Color Brown = new Color(0x795548);
+    public static final Color Grey = new Color(0x9E9E9E);
+    public static final Color BlueGrey = new Color(0x607D8B);
+    public static final Color Black = new Color(0x000000);
+    public static final Color White = new Color(0xFFFFFF);
 
-        this.canvasWidth = canvasWidth;
-        this.canvasHeight = canvasHeight;
+    public static void strokeCircle(Graphics2D g, int x, int y, int r){
 
-        AlgoCanvas canvas = new AlgoCanvas();
-        setContentPane(canvas);
-        pack();
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-
-        setVisible(true);
+        Ellipse2D circle = new Ellipse2D.Double(x-r, y-r, 2*r, 2*r);
+        g.draw(circle);
     }
 
-    public AlgoFrame(String title){
+    public static void fillCircle(Graphics2D g, int x, int y, int r){
 
-        this(title, 1024, 768);
+        Ellipse2D circle = new Ellipse2D.Double(x-r, y-r, 2*r, 2*r);
+        g.fill(circle);
     }
 
-    public int getCanvasWidth(){return canvasWidth;}
-    public int getCanvasHeight(){return canvasHeight;}
+    public static void strokeRectangle(Graphics2D g, int x, int y, int w, int h){
 
-    // data
-    private SelectionSortData data;
-    public void render(SelectionSortData data){
-        this.data = data;
-        repaint();
+        Rectangle2D rectangle = new Rectangle2D.Double(x, y, w, h);
+        g.draw(rectangle);
     }
 
-    private class AlgoCanvas extends JPanel{
+    public static void fillRectangle(Graphics2D g, int x, int y, int w, int h){
 
-        public AlgoCanvas(){
-            // 双缓存
-            super(true);
+        Rectangle2D rectangle = new Rectangle2D.Double(x, y, w, h);
+        g.fill(rectangle);
+    }
+
+    public static void setColor(Graphics2D g, Color color){
+        g.setColor(color);
+    }
+
+    public static void setStrokeWidth(Graphics2D g, int w){
+        int strokeWidth = w;
+        g.setStroke(new BasicStroke(strokeWidth, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+    }
+
+    public static void pause(int t) {
+        try {
+            Thread.sleep(t);
         }
-
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-
-            Graphics2D g2d = (Graphics2D)g;
-
-            // 抗锯齿
-            RenderingHints hints = new RenderingHints(
-                    RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
-            hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            g2d.addRenderingHints(hints);
-
-            // 具体绘制
-            int w = canvasWidth/data.N();
-            for(int i = 0 ; i < data.N() ; i ++ ) {
-                AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
-                AlgoVisHelper.fillRectangle(g2d, i * w, canvasHeight - data.get(i), w - 1, data.get(i));
-            }
-        }
-
-        @Override
-        public Dimension getPreferredSize(){
-            return new Dimension(canvasWidth, canvasHeight);
+        catch (InterruptedException e) {
+            System.out.println("Error sleeping");
         }
     }
+
 }
