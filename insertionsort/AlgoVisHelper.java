@@ -1,7 +1,7 @@
+import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
+import java.awt.geom.*;
 
-import java.awt.geom.Rectangle2D;
 import java.lang.InterruptedException;
 
 public class AlgoVisHelper {
@@ -72,4 +72,22 @@ public class AlgoVisHelper {
         }
     }
 
+    public static void putImage(Graphics2D g, int x, int y, String imageURL){
+
+        ImageIcon icon = new ImageIcon(imageURL);
+        Image image = icon.getImage();
+
+        g.drawImage(image, x, y, null);
+    }
+
+    public static void drawText(Graphics2D g, String text, int centerx, int centery){
+
+        if(text == null)
+            throw new IllegalArgumentException("Text is null in drawText function!");
+
+        FontMetrics metrics = g.getFontMetrics();
+        int w = metrics.stringWidth(text);
+        int h = metrics.getDescent();
+        g.drawString(text, centerx - w/2, centery + h);
+    }
 }
