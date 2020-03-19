@@ -9,10 +9,10 @@ public class AlgoVisualizer {
 
     public AlgoVisualizer(int sceneWidth, int sceneHeight, int N){
 
-        // 初始化数据
+        // Initialize data
         data = new InsertionSortData(N, sceneHeight);
 
-        // 初始化视图
+        // initialze visual graph
         EventQueue.invokeLater(() -> {
             frame = new AlgoFrame("Insertion Sort Visualization", sceneWidth, sceneHeight);
 
