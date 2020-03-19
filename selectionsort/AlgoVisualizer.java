@@ -11,7 +11,7 @@ public class AlgoVisualizer {
 
         data = new SelectionSortData(N, sceneHeight);
 
-        // 初始化视图
+        // initializing
         EventQueue.invokeLater(() -> {
             frame = new AlgoFrame("Selection Sort Visualization", sceneWidth, sceneHeight);
             new Thread(() -> {
@@ -26,7 +26,7 @@ public class AlgoVisualizer {
         AlgoVisHelper.pause(DELAY);
 
         for( int i = 0 ; i < data.N() ; i ++ ){
-            // 寻找[i, n)区间里的最小值的索引
+            // find index of min number between [i, n)
             int minIndex = i;
             for( int j = i + 1 ; j < data.N() ; j ++ ){
 
