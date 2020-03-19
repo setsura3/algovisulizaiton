@@ -41,7 +41,7 @@ public class AlgoFrame extends JFrame{
     private class AlgoCanvas extends JPanel{
 
         public AlgoCanvas(){
-            // 双缓存
+            // double caching
             super(true);
         }
 
@@ -51,14 +51,14 @@ public class AlgoFrame extends JFrame{
 
             Graphics2D g2d = (Graphics2D)g;
 
-            // 抗锯齿
+            // anti-alias
             RenderingHints hints = new RenderingHints(
                     RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
             hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g2d.addRenderingHints(hints);
 
-            // 具体绘制
+            // drawing
             int w = canvasWidth/data.N();
             for(int i = 0 ; i < data.N() ; i ++ ) {
                 AlgoVisHelper.setColor(g2d, AlgoVisHelper.LightBlue);
