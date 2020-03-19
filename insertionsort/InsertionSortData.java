@@ -1,7 +1,7 @@
 public class InsertionSortData {
 
     private int[] numbers;
-    public int orderedIndex = -1;   // [0...orderedIndex) 是有序的
+    public int orderedIndex = -1;   // [0...orderedIndex) 
     public int currentIndex = -1;
 
     public InsertionSortData(int N, int randomBound){
